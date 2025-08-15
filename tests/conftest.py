@@ -1,6 +1,7 @@
 
 import pytest
 import sys
+sys.path.append('.')
 import os
 
 from sqlalchemy import create_engine

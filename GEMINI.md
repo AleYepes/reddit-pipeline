@@ -8,15 +8,17 @@
 ├── .gitignore
 ├── .gitattribute
 ├── praw.ini              # PRAW credentials
-├── requirements.txt
 ├── README.md
 ├── test.ipynb            # Quick test file
+|
+└── tests/
 |
 └── docs/
 |
 └── src/
     ├── config.py         # Loads and manages configuration from .env and other files.
     ├── database.py       # Handles all database connections, session management, and schema setup.
+    ├── init_db.py        # Initializes the database with the correct schema.
     ├── models.py         # Defines the database tables using SQLAlchemy ORM.
     ├── scraper.py        # The core logic for fetching data from Reddit via PRAW.
     └── main.py           # The main entry point to start the application.
@@ -76,6 +78,20 @@ CREATE TABLE comments (
 *   **Indexes:** Create indexes on `post_id` and `parent_id` to dramatically speed up queries for retrieving comment trees.
 
 ## Core Application Logic & Fault Tolerance
+
+### **Testing** with pytest (`/tests/`)
+
+Use `pytest` to run the test suite.
+
+```bash
+pytest
+```
+
+The test suite includes:
+*   **`test_database.py`**: Basic tests for database initialization.
+*   **`test_database_logic.py`**: Comprehensive tests for the `insert_data` function in `src/database.py`, covering happy path, idempotency, and handling of empty data.
+*   **`test_scraper.py`**: Tests for the data fetching functions in `src/scraper.py`, using `pytest-mock` to simulate Reddit API responses and test various scenarios, including error handling and retry mechanisms.
+*   **`test_main.py`**: Tests for the `transform_praw_objects` function and an integration test for the main application loop in `src/main.py`, ensuring proper data flow and error handling.
 
 ### **Configuration (`src/config.py`)**
 *   Use libraries like `python-dotenv` to load your database URL and other secrets from the `.env` file.

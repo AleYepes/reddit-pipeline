@@ -28,7 +28,7 @@ def insert_data(session, subreddit_data, posts_data, comments_data):
             'name': subreddit_stmt.excluded.name,
             'description': subreddit_stmt.excluded.description,
             'subscribers': subreddit_stmt.excluded.subscribers,
-            'fetched_at': datetime.datetime.utcnow()
+            'fetched_at': datetime.datetime.now(datetime.timezone.utc)
         }
     )
     session.execute(subreddit_update_stmt)
@@ -46,7 +46,7 @@ def insert_data(session, subreddit_data, posts_data, comments_data):
             'score': posts_stmt.excluded.score,
             'upvote_ratio': posts_stmt.excluded.upvote_ratio,
             'num_comments': posts_stmt.excluded.num_comments,
-            'fetched_at': datetime.datetime.utcnow()
+            'fetched_at': datetime.datetime.now(datetime.timezone.utc)
         }
     )
     session.execute(posts_update_stmt)
@@ -61,7 +61,7 @@ def insert_data(session, subreddit_data, posts_data, comments_data):
         set_={
             'body': comments_stmt.excluded.body,
             'score': comments_stmt.excluded.score,
-            'fetched_at': datetime.datetime.utcnow()
+            'fetched_at': datetime.datetime.now(datetime.timezone.utc)
         }
     )
     session.execute(comments_update_stmt)

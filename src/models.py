@@ -13,7 +13,7 @@ class Subreddit(Base):
     created_utc = Column(TIMESTAMP(timezone=True), nullable=False)
     description = Column(TEXT)
     subscribers = Column(INTEGER)
-    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.utcnow)
+    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.now(datetime.timezone.utc))
 
     posts = relationship("Post", back_populates="subreddit")
 
@@ -30,7 +30,7 @@ class Post(Base):
     url = Column(TEXT)
     author = Column(String(255))
     subreddit_id = Column(String(10), ForeignKey('subreddits.id'), nullable=False)
-    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.utcnow)
+    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.now(datetime.timezone.utc))
 
     subreddit = relationship("Subreddit", back_populates="posts")
     comments = relationship("Comment", back_populates="post")
@@ -46,6 +46,6 @@ class Comment(Base):
     author = Column(String(255))
     post_id = Column(String(10), ForeignKey('posts.id'), nullable=False)
     parent_id = Column(String(20))
-    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.utcnow)
+    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.now(datetime.timezone.utc))
 
     post = relationship("Post", back_populates="comments")
