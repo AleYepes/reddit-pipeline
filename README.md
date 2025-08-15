@@ -1,3 +1,5 @@
+# Reddit data pipeline
+
 ## Create a `praw.ini` file with your credentials
 ```ini
 [bot1]

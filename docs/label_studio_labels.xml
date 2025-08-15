@@ -1,0 +1,27 @@
+<View>
+  <Labels name="label" toName="text">
+    <Label value="Performance Pain" background="#FFA39E"/>
+    <Label value="Usability Pain" background="#FFCCC7"/>
+    <Label value="Content Pain" background="#FFC069"/>
+    <Label value="Aesthetic Pain" background="#FFD666"/>
+    <Label value="Personalization Pain" background="#AD8B00"/>
+    <Label value="Trust Pain" background="#F759AB"/>
+    <Label value="Support Pain" background="#FF85C0"/>
+    <Label value="Value Pain" background="#FF7875"/>
+    <Label value="Delivery Pain" background="#FF4D4F"/>
+    <Label value="Workflow Pain" background="#D3F261"/>
+    <Label value="Communication Pain" background="#A0D911"/>
+    <Label value="Tooling Pain" background="#52C41A"/>
+    <Label value="Data Pain" background="#389E0D"/>
+    <Label value="Security Pain" background="#73D13D"/>
+    <Label value="Training Pain" background="#36CFC9"/>
+    <Label value="Staffing Pain" background="#13C2C2"/>
+    <Label value="Competition Pain" background="#1890FF"/>
+    <Label value="Reputation Pain" background="#096DD9"/>
+    <Label value="Sustainability Pain" background="#597EF7"/>
+    <Label value="Financial Pain" background="#2F54EB"/>
+    <Label value="Legal Pain" background="#722ED1"/>
+  </Labels>
+
+  <Text name="text" value="$text"/>
+</View>

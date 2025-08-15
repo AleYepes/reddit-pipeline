@@ -1,3 +1,18 @@
-/venv/
+# Environment variables
+.env
+praw.ini
 
-*.ini
+# Log files
+*.log
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Notebooks
+*.ipynb	diff=jupyternotebook
+
+*.ipynb	merge=jupyternotebook
