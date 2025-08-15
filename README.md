@@ -8,7 +8,7 @@ password=YOUR_REDDIT_PASSWORD
 user_agent=AGENT_NAME by u/YOUR_USERNAME
 ```
 
-## Install for notebooks + git
+## Install libs for notebooks + git
 
 1. Install nbstripout to Remove Unnecessary Jupyter Metadata
 
