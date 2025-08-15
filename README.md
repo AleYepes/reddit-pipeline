@@ -1,3 +1,4 @@
+
 # Reddit data pipeline
 
 ## Create a `praw.ini` file with your credentials
@@ -9,6 +10,15 @@ username=YOUR_REDDIT_USERNAME
 password=YOUR_REDDIT_PASSWORD
 user_agent=AGENT_NAME by u/YOUR_USERNAME
 ```
+
+## Environment Variables
+
+Before running the application, you need to set the following environment variable:
+
+- `DATABASE_URL`: The connection string for your PostgreSQL database. For example:
+  ```
+  export DATABASE_URL="postgresql://user:password@host:port/dbname"
+  ```
 
 ## Install libs for notebooks + git
 

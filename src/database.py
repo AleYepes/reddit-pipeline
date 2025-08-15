@@ -1,4 +1,3 @@
-
 import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -9,7 +8,7 @@ from src.config import DATABASE_URL
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-def init_db():
+def init_db(engine=engine):
     """Initializes the database and creates tables."""
     Base.metadata.create_all(bind=engine)
 
@@ -66,3 +65,6 @@ def insert_data(session, subreddit_data, posts_data, comments_data):
         }
     )
     session.execute(comments_update_stmt)
+
+def get_db_session():
+    return SessionLocal()
