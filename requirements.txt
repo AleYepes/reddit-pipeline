@@ -1,6 +1,13 @@
 praw
 sqlalchemy
-psycopg2-binary
 pytest
+dotenv
+psycopg2-binary
 tenacity
 pytest-mock
+
+transformers
+# torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# bitsandbytes==0.37.2
+accelerate
+scipy
