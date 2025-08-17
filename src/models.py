@@ -1,51 +1,53 @@
-
-import datetime
-from sqlalchemy import create_engine, Column, String, TEXT, TIMESTAMP, INTEGER, REAL, ForeignKey
+from sqlalchemy import create_engine, Column, String, TEXT, TIMESTAMP, INTEGER, REAL, ForeignKey, BOOLEAN, func
 from sqlalchemy.orm import declarative_base, relationship
+
 
 Base = declarative_base()
 
 class Subreddit(Base):
     __tablename__ = 'subreddits'
 
-    id = Column(String(10), primary_key=True)
-    name = Column(String(255), nullable=False, unique=True)
+    name = Column(String(12), primary_key=True)
+    display_name = Column(String(21), nullable=False, unique=True)
     created_utc = Column(TIMESTAMP(timezone=True), nullable=False)
     description = Column(TEXT)
     subscribers = Column(INTEGER)
-    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.now(datetime.timezone.utc))
+    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now())
+    over_18 = Column(BOOLEAN)
 
-    posts = relationship("Post", back_populates="subreddit")
+    submissions = relationship("Submission", back_populates="subreddit")
 
-class Post(Base):
-    __tablename__ = 'posts'
+class Submission(Base):
+    __tablename__ = 'submissions'
 
-    id = Column(String(10), primary_key=True)
-    title = Column(TEXT, nullable=False)
+    name = Column(String(12), primary_key=True)
+    title = Column(String(300), nullable=False)
     selftext = Column(TEXT)
     created_utc = Column(TIMESTAMP(timezone=True), nullable=False)
     score = Column(INTEGER, nullable=False)
     upvote_ratio = Column(REAL)
     num_comments = Column(INTEGER, nullable=False)
     url = Column(TEXT)
-    author = Column(String(255))
-    subreddit_id = Column(String(10), ForeignKey('subreddits.id'), nullable=False)
-    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.now(datetime.timezone.utc))
+    author = Column(String(20))
+    subreddit_name = Column(String(12), ForeignKey('subreddits.name'), nullable=False)
+    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now())
+    locked = Column(BOOLEAN)
+    over_18 = Column(BOOLEAN)
+    flair_text = Column(String(64))
 
-    subreddit = relationship("Subreddit", back_populates="posts")
-    comments = relationship("Comment", back_populates="post")
+    subreddit = relationship("Subreddit", back_populates="submissions")
+    comments = relationship("Comment", back_populates="submission")
 
 
 class Comment(Base):
     __tablename__ = 'comments'
 
-    id = Column(String(10), primary_key=True)
+    name = Column(String(12), primary_key=True)
     body = Column(TEXT, nullable=False)
     created_utc = Column(TIMESTAMP(timezone=True), nullable=False)
     score = Column(INTEGER, nullable=False)
-    author = Column(String(255))
-    post_id = Column(String(10), ForeignKey('posts.id'), nullable=False)
-    parent_id = Column(String(20))
-    fetched_at = Column(TIMESTAMP(timezone=True), nullable=False, default=datetime.datetime.now(datetime.timezone.utc))
+    author = Column(String(20))
+    submission_name = Column(String(12), ForeignKey('submissions.name'), nullable=False)
+    parent_name = Column(String(12))
 
-    post = relationship("Post", back_populates="comments")
+    submission = relationship("Submission", back_populates="comments")
