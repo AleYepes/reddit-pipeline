@@ -3,10 +3,7 @@ import logging
 import datetime
 from src.database import SessionLocal, init_db, insert_data
 from src import scraper
-
-# --- Configuration ---
-TARGET_SUBREDDITS = ["python", "learnpython"] # Example subreddits
-POST_LIMIT = 100 # Max posts to fetch per subreddit
+from src.config import TARGET_SUBREDDITS, POST_LIMIT
 
 # --- Logging Setup ---
 logging.basicConfig(
